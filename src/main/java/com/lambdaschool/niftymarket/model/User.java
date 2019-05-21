@@ -31,6 +31,8 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private List<UserRoles> userRoles = new ArrayList<>();
 
+
+
     public User()
     {
     }
@@ -38,17 +40,20 @@ public class User extends Auditable
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+
     }
 
     public User(String username, String password, List<UserRoles> userRoles)
     {
         setUsername(username);
-        setPassword(password);
+//        setPassword(password);///this was double hashing my newly registered users the way I currently have my controller configured
+        setPasswordNoEncrypt(password);
         for (UserRoles ur : userRoles)
         {
             ur.setUser(this);
         }
         this.userRoles = userRoles;
+
     }
 
     public long getUserid()

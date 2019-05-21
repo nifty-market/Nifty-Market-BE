@@ -59,6 +59,7 @@ public class UserController
 
 
 //    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @CrossOrigin
     @PostMapping(value = "/register", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
     {
@@ -73,7 +74,7 @@ public class UserController
 
          User userBuilder = new UserBuilder().username(newuser.getUsername())
                 .password(newuser.getPassword()).userRoles(users).buildUser();
-
+//        System.out.println(newuser.getPassword());
         newuser =  userService.save(userBuilder);
 
         // set the location header for the newly created resource

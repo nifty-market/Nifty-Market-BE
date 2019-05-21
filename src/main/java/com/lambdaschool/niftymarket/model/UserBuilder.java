@@ -11,7 +11,7 @@ public class UserBuilder {
 
     public User buildUser()
     {
-        return new User( username,  password, userRoles);
+        return new User( username,password,userRoles);
     }
 
     public UserBuilder username(String username)

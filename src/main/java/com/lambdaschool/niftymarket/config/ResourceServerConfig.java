@@ -41,6 +41,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                 .antMatchers("/playingcards/**","/users/register/**").permitAll()
                 .antMatchers("/data/**").hasAnyRole("DATA")
                 .antMatchers("/login/**").hasAnyRole("USER")
+                .antMatchers("/oauth/token").permitAll()
             .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
         // http.requiresChannel().anyRequest().requiresSecure();

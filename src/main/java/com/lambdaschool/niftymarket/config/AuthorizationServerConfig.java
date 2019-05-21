@@ -8,7 +8,11 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableAuthorizationServer
@@ -53,4 +57,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.tokenStore(tokenStore)
                 .authenticationManager(authenticationManager);
     }
+
+//    @Override
+//    public void configure(AuthorizationServerSecurityConfigurer security) {
+//        //... other config
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.applyPermitDefaultValues();
+//
+//        // Maybe there's a way to use config from AuthorizationServerEndpointsConfigurer endpoints?
+//        source.registerCorsConfiguration("/oauth/token", config);
+//        CorsFilter filter = new CorsFilter(source);
+//        security.addTokenEndpointAuthenticationFilter(filter);
+//    }
 }
