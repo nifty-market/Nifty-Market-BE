@@ -34,7 +34,7 @@ public class CardController {
                             "Default sort order is ascending. " +
                             "Multiple sort criteria are supported.")})
     @GetMapping(value = "/all", produces = {"application/json"})
-    public ResponseEntity<?> listAllBooks(@PageableDefault(page = 0,
+    public ResponseEntity<?> listAllCards(@PageableDefault(page = 0,
             size = 2) Pageable pageable)
     {
         List<Card> myBooks = cardService.findAll(pageable);
