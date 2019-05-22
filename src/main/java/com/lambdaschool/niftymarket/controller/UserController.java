@@ -72,10 +72,13 @@ public class UserController
         //this returns a User object due to final method .buildUser
         //starts as a UserBuilder type
 
-         User userBuilder = new UserBuilder().username(newuser.getUsername())
-                .password(newuser.getPassword()).userRoles(users).buildUser();
+        User myNewUser = new User(newuser.getUsername(),newuser.getPassword());
+
+        myNewUser.setUserRoles(users);
+//         User userBuilder = new UserBuilder().username(newuser.getUsername())
+//                .password(newuser.getPassword()).userRoles(users).buildUser();
 //        System.out.println(newuser.getPassword());
-        newuser =  userService.save(userBuilder);
+        newuser =  userService.save(myNewUser);
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();

@@ -67,10 +67,10 @@ public class SeedData implements CommandLineRunner
 
 
 
-        Card c1 = new Card("Daragaz the Ignitor","Dragon Legend","https://6d4be195623157e28848-7697ece4918e0a73861de0eb37d08968.ssl.cf1.rackcdn.com/162131_200w.jpg",1999.00);
-        Card c2 = new Card("SpiritMonger", "Soul eater", "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=438775&type=card",2000.00);
-        Card c3 = new Card("Royal Assassin","a king's most trusted courier","https://img.scryfall.com/cards/large/en/m12/105.jpg?1517813031",2019.00);
-        Card c4 = new Card("Tefaris Moat", "Enchantment", "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=108787&type=card",1000.00);
+        Card c1 = new Card("Daragaz the Ignitor","Dragon Legend","https://6d4be195623157e28848-7697ece4918e0a73861de0eb37d08968.ssl.cf1.rackcdn.com/162131_200w.jpg",1999.00,u1);
+        Card c2 = new Card("SpiritMonger", "Soul eater", "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=438775&type=card",2000.00,u1);
+        Card c3 = new Card("Royal Assassin","a king's most trusted courier","https://img.scryfall.com/cards/large/en/m12/105.jpg?1517813031",2019.00,u2);
+        Card c4 = new Card("Tefaris Moat", "Enchantment", "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=108787&type=card",1000.00,u3);
 
 
 

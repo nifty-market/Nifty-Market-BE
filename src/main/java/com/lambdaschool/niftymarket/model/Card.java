@@ -1,5 +1,7 @@
 package com.lambdaschool.niftymarket.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,11 @@ public class Card extends Auditable {
     @Column(nullable = false)
     private String carddescription;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid", nullable = false)
+    @JsonIgnoreProperties({"cards","hibernateLazyInitializer"})
+    private User user;
+
     private String imgUrl;
 
     private Double price;
@@ -25,11 +32,20 @@ public class Card extends Auditable {
     public Card() {
     }
 
-    public Card(String cardname, String carddescription, String imgUrl, Double price) {
+    public Card(String cardname, String carddescription, String imgUrl, Double price,User user) {
         this.cardname = cardname;
         this.carddescription = carddescription;
         this.imgUrl = imgUrl;
         this.price = price;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getCardid() {

@@ -31,6 +31,11 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private List<UserRoles> userRoles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties("user")
+    private List<Card> cards = new ArrayList<>();
 
 
     public User()
@@ -39,21 +44,33 @@ public class User extends Auditable
 
     public User(String username, String password) {
         this.username = username;
-        this.password = password;
+        setPasswordNoEncrypt(password);
 
+    }
+
+    public User(String username){
+        this.username = username;
     }
 
     public User(String username, String password, List<UserRoles> userRoles)
     {
         setUsername(username);
-//        setPassword(password);///this was double hashing my newly registered users the way I currently have my controller configured
-        setPasswordNoEncrypt(password);
+        setPassword(password);///this was double hashing my newly registered users the way I currently have my controller configured
+//        setPasswordNoEncrypt(password);
         for (UserRoles ur : userRoles)
         {
             ur.setUser(this);
         }
         this.userRoles = userRoles;
 
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 
     public long getUserid()
