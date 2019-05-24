@@ -1,6 +1,7 @@
 package com.lambdaschool.niftymarket.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -38,14 +39,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                         ).permitAll()
                 // hasAnyRole can be a list of roles as in "ADMIN", "DATA"
                 .antMatchers("/roles", "/actuator/**").hasAnyRole("ADMIN")
-                .antMatchers("/playingcards/**","/users/register/**").permitAll()
+                .antMatchers("/users/register/**").permitAll()
                 .antMatchers("/data/**").hasAnyRole("DATA")
-                .antMatchers("/login/**").hasAnyRole("USER")
+                .antMatchers("/login/**","/playingcards/**","/transactions/**").hasAnyRole("USER")
                 .antMatchers("/oauth/token").permitAll()
             .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
         // http.requiresChannel().anyRequest().requiresSecure();
-        http.csrf().disable();
+        http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll();
         http.headers().frameOptions().disable();
     }
 }

@@ -6,6 +6,7 @@ import com.lambdaschool.niftymarket.model.UserBuilder;
 import com.lambdaschool.niftymarket.model.UserRoles;
 import com.lambdaschool.niftymarket.service.RoleService;
 import com.lambdaschool.niftymarket.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -59,6 +60,7 @@ public class UserController
 
 
 //    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @ApiOperation(value = "Allows non authenticated user to create an account. You would need to initiate /oath/token & /oauth/login afterward to get dashboard info")
     @CrossOrigin
     @PostMapping(value = "/register", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
@@ -72,10 +74,13 @@ public class UserController
         //this returns a User object due to final method .buildUser
         //starts as a UserBuilder type
 
-         User userBuilder = new UserBuilder().username(newuser.getUsername())
-                .password(newuser.getPassword()).userRoles(users).buildUser();
+        User myNewUser = new User(newuser.getUsername(),newuser.getPassword());
+
+        myNewUser.setUserRoles(users);
+//         User userBuilder = new UserBuilder().username(newuser.getUsername())
+//                .password(newuser.getPassword()).userRoles(users).buildUser();
 //        System.out.println(newuser.getPassword());
-        newuser =  userService.save(userBuilder);
+        newuser =  userService.save(myNewUser);
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();

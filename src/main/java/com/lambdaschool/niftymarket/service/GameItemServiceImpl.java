@@ -1,9 +1,12 @@
 package com.lambdaschool.niftymarket.service;
 
+
 import com.lambdaschool.niftymarket.exception.ResourceNotFoundException;
 import com.lambdaschool.niftymarket.model.Card;
+import com.lambdaschool.niftymarket.model.GameItem;
 import com.lambdaschool.niftymarket.model.Role;
 import com.lambdaschool.niftymarket.repos.CardRepository;
+import com.lambdaschool.niftymarket.repos.GameItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,17 +16,17 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service(value = "cardService")
-public class CardServiceImpl implements CardService{
+@Service(value = "gameItemService")
+public class GameItemServiceImpl implements GameItemService{
 
     @Autowired
-    private CardRepository cardRepository;
+    private GameItemRepository gameItemRepository;
 
     @Override
-    public List<Card> findAll(Pageable pageable)
+    public List<GameItem> findAll(Pageable pageable)
     {
-        ArrayList<Card> list = new ArrayList<>();
-        cardRepository.findAll().iterator().forEachRemaining(list::add);
+        ArrayList<GameItem> list = new ArrayList<>();
+        gameItemRepository.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
 
@@ -40,9 +43,9 @@ public class CardServiceImpl implements CardService{
 
     @Transactional
     @Override
-    public Card save(Card card)
+    public GameItem save(GameItem card)
     {
-        Card newcard = new Card();
+        GameItem newcard = new GameItem();
         newcard.setCategory(card.getCategory());
         newcard.setName(card.getName());
         newcard.setImgUrl(card.getImgUrl());
@@ -52,20 +55,20 @@ public class CardServiceImpl implements CardService{
         newcard.setUser(card.getUser());
 
 
-        return cardRepository.save(newcard);
+        return gameItemRepository.save(newcard);
     }
 
     @Override
-    public Card findCardById(long id)
+    public GameItem findGameById(long id)
     {
-        return cardRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
+        return gameItemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
     }
 
 
     @Override
-    public Card update(Card card, long id)
+    public GameItem update(GameItem card, long id)
     {
-        Card currentCard = cardRepository.findById(id)
+        GameItem currentCard = gameItemRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
 
         if (card.getCategory() != null)
@@ -103,6 +106,7 @@ public class CardServiceImpl implements CardService{
             currentCard.setImgUrl(card.getImgUrl());
         }
 
-        return cardRepository.save(currentCard);
+        return gameItemRepository.save(currentCard);
     }
 }
+

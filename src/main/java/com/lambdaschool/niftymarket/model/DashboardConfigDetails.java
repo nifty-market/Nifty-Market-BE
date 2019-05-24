@@ -1,27 +1,23 @@
 package com.lambdaschool.niftymarket.model;
 
+
 import java.util.List;
 
-public class HomeConfigDetails {
+public class DashboardConfigDetails {
 
 
     private List<Card> cards;
     private List<VideoGame> videogames;
     private Object securitydetails;
-    private List<GameItem> gameitems;
 
-
-    public HomeConfigDetails() {
+    public DashboardConfigDetails() {
     }
 
-    public HomeConfigDetails(List<VideoGame> videogames, List<Card> cards, List<GameItem> gameitems) {
-
+    public DashboardConfigDetails(List<Card> cards, List<VideoGame> videogames, Object securitydetails) {
         this.cards = cards;
         this.videogames = videogames;
         this.securitydetails = securitydetails;
-        this.gameitems= gameitems;
     }
-
 //    public String getUsername() {
 //        return username;
 //    }
@@ -30,14 +26,6 @@ public class HomeConfigDetails {
 //        this.username = username;
 //    }
 
-
-    public List<GameItem> getGameitems() {
-        return gameitems;
-    }
-
-    public void setGameitems(List<GameItem> gameitems) {
-        this.gameitems = gameitems;
-    }
 
     public Object getSecuritydetails() {
         return securitydetails;

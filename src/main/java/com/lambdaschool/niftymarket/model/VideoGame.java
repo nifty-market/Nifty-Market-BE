@@ -1,13 +1,16 @@
 package com.lambdaschool.niftymarket.model;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "playingcards")
-public class Card extends Product {
+@Table(name = "videogames")
+public class VideoGame extends Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -20,7 +23,7 @@ public class Card extends Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = false)
-    @JsonIgnoreProperties({"cards","hibernateLazyInitializer"})
+    @JsonIgnoreProperties({"videogames","hibernateLazyInitializer"})
     private User user;
 
 //    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
@@ -29,18 +32,16 @@ public class Card extends Product {
 
     private String imgUrl;
 
-
     private Double price;
 
     private String category;
-
     private String subcategory;
-//
-//    private boolean userposted;
-//
-//    private boolean userpurchased;
+
 //    private String seller;
 //   private Double sellerRating;
+
+    public VideoGame() {
+    }
 
 //    public Set<WishList> getCarts() {
 //        return carts;
@@ -50,54 +51,15 @@ public class Card extends Product {
 //        this.carts = carts;
 //    }
 
-//    public boolean isUserposted() {
-//        return userposted;
-//    }
-//
-//    public boolean isUserpurchased() {
-//        return userpurchased;
-//    }
-
-    public Card() {
-    }
-    public Card(String category, String subcategory,String name, String description, String imgUrl, Double price) {
+    public VideoGame(String category, String subcategory, String name, String description, String imgUrl, Double price, User user) {
         this.name = name;
         this.description = description;
         this.imgUrl = imgUrl;
         this.price = price;
         this.user = user;
         this.category = category;
-        this.subcategory = subcategory;
+        this.subcategory= subcategory;
     }
-
-
-    public Card(String category, String subcategory,String name, String description, String imgUrl, Double price,User user) {
-        this.name = name;
-        this.description = description;
-        this.imgUrl = imgUrl;
-        this.price = price;
-        this.user = user;
-        this.category = category;
-        this.subcategory = subcategory;
-//        this.userposted = userposted;
-//        this.userpurchased = userpurchased;
-    }
-
-//    public boolean getUserposted() {
-//        return userposted;
-//    }
-//
-//    public void setUserposted(boolean userposted) {
-//        this.userposted = userposted;
-//    }
-
-//    public boolean getUserpurchased() {
-//        return userpurchased;
-//    }
-//
-//    public void setUserpurchased(boolean userpurchased) {
-//        this.userpurchased = userpurchased;
-//    }
 
     public String getSubcategory() {
         return subcategory;
@@ -105,10 +67,6 @@ public class Card extends Product {
 
     public void setSubcategory(String subcategory) {
         this.subcategory = subcategory;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public long getId() {
@@ -135,10 +93,6 @@ public class Card extends Product {
         this.description = description;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -147,7 +101,15 @@ public class Card extends Product {
         this.category = category;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getImgUrl() {
         return imgUrl;
@@ -165,3 +127,4 @@ public class Card extends Product {
         this.price = price;
     }
 }
+
