@@ -37,6 +37,51 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private List<Card> cards = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties("user")
+    private List<GameItem> gameItems = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    @JsonIgnoreProperties("user")
+    private List<VideoGame> videogames = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties("user")
+    private List<Transaction> transactions = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "user",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true)
+//    @JsonIgnoreProperties("user")
+//    private List<Purchase> purchases = new ArrayList<>();
+
+    public List<GameItem> getGameItems() {
+        return gameItems;
+    }
+
+    public void setGameItems(List<GameItem> gameItems) {
+        this.gameItems = gameItems;
+    }
+
+    @OneToOne(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties("user")
+    private WishList wishlist;
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
 
     public User()
     {
@@ -52,6 +97,14 @@ public class User extends Auditable
         this.username = username;
     }
 
+//    public List<Purchase> getPurchases() {
+//        return purchases;
+//    }
+//
+//    public void setPurchases(List<Purchase> purchases) {
+//        this.purchases = purchases;
+//    }
+
     public User(String username, String password, List<UserRoles> userRoles)
     {
         setUsername(username);
@@ -63,6 +116,22 @@ public class User extends Auditable
         }
         this.userRoles = userRoles;
 
+    }
+
+    public List<VideoGame> getVideogames() {
+        return videogames;
+    }
+
+    public void setVideogames(List<VideoGame> videogames) {
+        this.videogames = videogames;
+    }
+
+    public WishList getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(WishList wishlist) {
+        this.wishlist = wishlist;
     }
 
     public List<Card> getCards() {

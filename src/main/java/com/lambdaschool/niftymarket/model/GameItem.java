@@ -1,13 +1,15 @@
 package com.lambdaschool.niftymarket.model;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "playingcards")
-public class Card extends Product {
+@Table(name = "gameitems")
+public class GameItem extends Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -20,7 +22,7 @@ public class Card extends Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = false)
-    @JsonIgnoreProperties({"cards","hibernateLazyInitializer"})
+    @JsonIgnoreProperties({"gameItems","hibernateLazyInitializer"})
     private User user;
 
 //    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
@@ -58,20 +60,20 @@ public class Card extends Product {
 //        return userpurchased;
 //    }
 
-    public Card() {
+    public GameItem() {
     }
-    public Card(String category, String subcategory,String name, String description, String imgUrl, Double price) {
+    public GameItem(String category, String subcategory,String name, String description, String imgUrl, Double price) {
         this.name = name;
         this.description = description;
         this.imgUrl = imgUrl;
         this.price = price;
-        this.user = user;
+
         this.category = category;
         this.subcategory = subcategory;
     }
 
 
-    public Card(String category, String subcategory,String name, String description, String imgUrl, Double price,User user) {
+    public GameItem(String category, String subcategory,String name, String description, String imgUrl, Double price,User user) {
         this.name = name;
         this.description = description;
         this.imgUrl = imgUrl;
@@ -165,3 +167,4 @@ public class Card extends Product {
         this.price = price;
     }
 }
+

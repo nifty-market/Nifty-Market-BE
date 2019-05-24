@@ -10,10 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface CardRepository extends PagingAndSortingRepository<Card, Long> {
-    List<Card> findByCardnameContainingIgnoreCase(String name, Pageable pageable);
+    List<Card> findBynameContainingIgnoreCase(String name, Pageable pageable);
+
+
 
 //    @Transactional
 //    @Modifying
-//    @Query(value = "INSERT INTO authbooks(authorid, bookid) values (:authorid, :bookid)", nativeQuery = true)
-//    void insertIntoAuthBooks(long authorid, long bookid);
+//    @Query(value = "DELETE from Cards where id = :id", nativeQuery = true)
+//    void deleteCardId(long id);
+
 }
+

@@ -1,10 +1,14 @@
 package com.lambdaschool.niftymarket.controller;
 
-import com.lambdaschool.niftymarket.model.Card;
+
+
+import com.lambdaschool.niftymarket.model.GameItem;
 import com.lambdaschool.niftymarket.model.User;
-import com.lambdaschool.niftymarket.repos.CardRepository;
+
+import com.lambdaschool.niftymarket.repos.GameItemRepository;
 import com.lambdaschool.niftymarket.repos.UserRepository;
-import com.lambdaschool.niftymarket.service.CardService;
+
+import com.lambdaschool.niftymarket.service.GameItemService;
 import com.lambdaschool.niftymarket.service.UserService;
 import io.swagger.annotations.*;
 
@@ -25,21 +29,24 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/playingcards")
-public class CardController {
+@RequestMapping("/gameitems")
+public class GameItemController {
 
-    @Autowired
-    CardService cardService;
+
 
     @Autowired
     UserRepository userRepository;
 
+
+
     @Autowired
-    CardRepository cardRepository;
+    GameItemRepository gameItemRepository;
+    @Autowired
+    GameItemService gameItemService;
 
 
 
-//    @ApiOperation(value = "returns all Cards", response = Card.class, responseContainer = "List")
+    //    @ApiOperation(value = "returns all Cards", response = Card.class, responseContainer = "List")
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "page", dataType = "integr", paramType = "query",
 //                    value = "Results page you want to retrieve (0..N)"),
@@ -56,10 +63,10 @@ public class CardController {
 //        List<Card> myBooks = cardService.findAll(pageable);
 //        return new ResponseEntity<>(myBooks, HttpStatus.OK);
 //    }
-    @ApiOperation(value = "Permits Authenticated user to post card. Don't worry about the user parameter or id parameter.", response = Card.class, responseContainer = "List")
+    @ApiOperation(value = "Permits Authenticated user to post gameitem. Don't worry about the user parameter or id parameter.", response = GameItem.class, responseContainer = "List")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", dataType = "string", paramType = "body",
-                    value = "Name of card"),
+                    value = "Name of gameitem"),
             @ApiImplicitParam(name = "description", dataType = "string", paramType = "body",
                     value = "Description of item."),
             @ApiImplicitParam(name = "imgUrl", allowMultiple = true, dataType = "string", paramType = "query",
@@ -67,53 +74,54 @@ public class CardController {
             @ApiImplicitParam(name = "price", allowMultiple = true, dataType = "double", paramType = "body",
                     value = "Item price"),
             @ApiImplicitParam(name = "category", allowMultiple = true, dataType = "string", paramType = "body",
-                    value = "Item major category Card or Videogame"),
+                    value = "Item major category gameitem or Videogame"),
             @ApiImplicitParam(name = "subcategory", allowMultiple = true, dataType = "string", paramType = "body",
-                    value = "Item minor category, e.g. type of card")})
+                    value = "Item minor category, e.g. type of gameitem")})
 
-    @PostMapping(value = "/post/card")
-    public ResponseEntity<?> postNewCard(@Valid @RequestBody Card newCard)
+    @PostMapping(value = "/post/gameitem")
+    public ResponseEntity<?> postNewGameItem(@Valid @RequestBody GameItem newGame)
     {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails)principal).getUsername();
 
 
         User currentUser = userRepository.findByUsername(username);
-        newCard.setUser(currentUser);
-//        newCard.setUserposted(true);
+        newGame.setUser(currentUser);
+//        newGame.setUserposted(true);
 
-        cardService.save(newCard);
+        gameItemRepository.save(newGame);
 
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @ApiOperation(value = "Permits Authenticated user to delete card")
+    @ApiOperation(value = "Permits Authenticated user to delete gameitem")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cardid", dataType = "int", paramType = "query",
-                    value = "Id of card"),})
-    @DeleteMapping("/delete/card/{cardid}")
-    public ResponseEntity<?> deleteByCardId(@PathVariable long cardid)
+            @ApiImplicitParam(name = "gameitemid", dataType = "int", paramType = "query",
+                    value = "Id of gameitem"),})
+    @DeleteMapping("/delete/gameitem/{gameitemid}")
+    public ResponseEntity<?> deleteByGameItemId(@PathVariable long gameid)
     {
-        cardRepository.deleteById(cardid);
+        gameItemRepository.deleteById(gameid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Permits Authenticated user to update card",response = Card.class)
+    @ApiOperation(value = "Permits Authenticated user to update gameitem",response = GameItem.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "cardid", dataType = "int", paramType = "query",
-                    value = "Id of card"),
-            @ApiImplicitParam(name = "updateCard", dataType = "object", paramType = "body",
-                    value = "Any parameter from the Card object schema you wish to update")})
-    @PutMapping(value = "/update/{cardid}")
-    public ResponseEntity<?> updateCard(
+            @ApiImplicitParam(name = "gameitemid", dataType = "int", paramType = "query",
+                    value = "Id of gameitem"),
+            @ApiImplicitParam(name = "updateGameItem", dataType = "object", paramType = "body",
+                    value = "Any parameter from the GameItem object schema you wish to update")})
+    @PutMapping(value = "/update/{gameitemid}")
+    public ResponseEntity<?> updateGameItem(
             @RequestBody
-                    Card updateCard,
+                    GameItem updateGameItem,
             @PathVariable
-                    long cardid)
+                    long gameitemid)
     {
-        cardService.update(updateCard, cardid);
+        gameItemService.update(updateGameItem, gameitemid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
 }
+
