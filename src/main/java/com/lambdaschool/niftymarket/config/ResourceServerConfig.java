@@ -44,7 +44,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                 .antMatchers("/login/**","/playingcards/**","/transactions/**").hasAnyRole("USER")
                 .antMatchers("/oauth/token").permitAll()
             .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
-
+        //below is valuable for Oauth2 token requests and preflight option requests allowing them through spring security
         // http.requiresChannel().anyRequest().requiresSecure();
         http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll();
         http.headers().frameOptions().disable();
