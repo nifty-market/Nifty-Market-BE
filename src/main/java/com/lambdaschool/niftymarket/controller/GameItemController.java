@@ -79,7 +79,7 @@ public class GameItemController {
                     value = "Item minor category, e.g. type of gameitem")})
 
     @PostMapping(value = "/post/gameitem")
-    public ResponseEntity<?> postNewGameItem(@Valid @RequestBody GameItem newGame)
+    public ResponseEntity<?> postNewGameItem(@Valid @RequestBody GameItem newGame) throws Exception
     {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails)principal).getUsername();

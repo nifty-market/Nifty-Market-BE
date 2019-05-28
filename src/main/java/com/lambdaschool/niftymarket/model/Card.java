@@ -65,7 +65,7 @@ public class Card extends Product {
         this.description = description;
         this.imgUrl = imgUrl;
         this.price = price;
-        this.user = user;
+
         this.category = category;
         this.subcategory = subcategory;
     }

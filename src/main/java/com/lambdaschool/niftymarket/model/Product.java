@@ -14,16 +14,6 @@ public abstract class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String description;
-
-    private String imgUrl;
-
-
-    private Double price;
-
-    private String category;
-
-    private String subcategory;
 
 
 
