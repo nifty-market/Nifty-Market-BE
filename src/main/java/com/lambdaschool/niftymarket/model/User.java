@@ -37,6 +37,12 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private List<Card> cards = new ArrayList<>();
 
+//    @OneToMany(mappedBy = "user",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true)
+//    @JsonIgnoreProperties("user")
+//    private List<Product> products = new ArrayList<>();
+
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
@@ -49,11 +55,15 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private List<VideoGame> videogames = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JsonIgnoreProperties("user")
-    private List<Transaction> transactions = new ArrayList<>();
+    //uncommenting transactions below would make the relation bidirectional.
+    //this is a valuable distinction in thinking about how much information you want associated with
+    //a user object in your database
+
+//    @OneToMany(mappedBy = "user",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true)
+//    @JsonIgnoreProperties("user")
+//    private List<Transaction> transactions = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "user",
 //            cascade = CascadeType.ALL,
@@ -75,13 +85,13 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private WishList wishlist;
 
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
-    }
+//    public List<Transaction> getTransactions() {
+//        return transactions;
+//    }
+//
+//    public void setTransactions(List<Transaction> transactions) {
+//        this.transactions = transactions;
+//    }
 
     public User()
     {

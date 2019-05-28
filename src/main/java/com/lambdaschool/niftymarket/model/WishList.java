@@ -15,29 +15,41 @@ public class WishList extends Auditable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userid")
-    @JsonIgnoreProperties({"wishlist","hibernateLazyInitializer"})
-    private User user;
+//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "userid")
+//    @JsonIgnoreProperties({"wishlist","hibernateLazyInitializer"})
+//    private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "CART_PRODUCT", joinColumns = @JoinColumn(name = "CART_ID") , inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID") )
-    @JsonIgnoreProperties({"cart_product","hibernateLazyInitializer"})
-    private Set<Product> products;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonIgnoreProperties({"wishlist","hibernateLazyInitializer"})
+    private Set<WishListItem> wishListItems;
+
+    @OneToOne
+    @JsonIgnoreProperties("wishlist")
+    private User user;
 
     public WishList() {
     }
 
-    public WishList(Set<Product> products) {
-        this.products = products;
+    public WishList(Set<WishListItem> wishListItems, User user) {
+        this.wishListItems = wishListItems;
+        this.user = user;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+
+    public Set<WishListItem> getWishListItems() {
+        return wishListItems;
+    }
+
+    public void setWishListItems(Set<WishListItem> wishListItems) {
+        this.wishListItems = wishListItems;
     }
 
     public User getUser() {
@@ -47,15 +59,6 @@ public class WishList extends Auditable {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
 }
 
 

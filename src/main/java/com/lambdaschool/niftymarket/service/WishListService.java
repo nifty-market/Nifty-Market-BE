@@ -4,6 +4,7 @@ import com.lambdaschool.niftymarket.model.Auditable;
 import com.lambdaschool.niftymarket.model.Card;
 import com.lambdaschool.niftymarket.model.Product;
 import com.lambdaschool.niftymarket.model.WishList;
+import com.lambdaschool.niftymarket.repos.WishListRepository;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.domain.Pageable;
 
@@ -22,6 +23,9 @@ public interface WishListService {
     void insertIntoAuthBooks(long cartid, long itemid);
 
     List<WishList> update(WishList author, long id);
+
+
+
 
 //    Card findByBookid(long bookid);
 }

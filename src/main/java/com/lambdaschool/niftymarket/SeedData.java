@@ -116,12 +116,12 @@ public class SeedData implements CommandLineRunner
 
 
 //        ArrayList<Card>mylist = new ArrayList<>();
-        Set<Product> a = new HashSet<>();
-        a.add(v2);
-        a.add(c1);
-        WishList sampleWishList = new WishList(a);
-        sampleWishList.setUser(u2);
-        wishListRepository.save(sampleWishList);
+//        Set<Product> a = new HashSet<>();
+//        a.add(v2);
+//        a.add(c1);
+//        WishList sampleWishList = new WishList(a);
+//        sampleWishList.setUser(u2);
+//        wishListRepository.save(sampleWishList);
 
         Transaction t = new Transaction(8888.00,
                 "testCard",

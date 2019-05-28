@@ -24,6 +24,7 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties({"transactions","hibernateLazyInitializer"})
+    //Json ignore necessary when relationship is bi-directional
     private User user;
 
     public Transaction() {

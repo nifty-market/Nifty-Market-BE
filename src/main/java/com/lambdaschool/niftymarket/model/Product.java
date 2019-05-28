@@ -7,8 +7,9 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Product {
+@Inheritance(strategy=InheritanceType.JOINED)//removing this causes an error in database schema where I cannot list a user by json
+//seems that the tables of sub classes do not get created in db
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

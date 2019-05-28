@@ -47,6 +47,8 @@ public class WishListServiceImpl implements WishListService {
 
     }
 
+
+
     @Override
     public List<WishList> update(WishList author, long id) {
         return null;
