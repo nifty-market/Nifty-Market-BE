@@ -19,8 +19,9 @@ public class Card extends Product {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid", nullable = false)
+//    @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties({"cards","hibernateLazyInitializer"})
+
     private User user;
 
 //    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")

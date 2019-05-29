@@ -21,7 +21,7 @@ public class GameItem extends Product {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid", nullable = false)
+//    @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties({"gameItems","hibernateLazyInitializer"})
     private User user;
 

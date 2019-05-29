@@ -82,7 +82,7 @@ public class User extends Auditable
     @OneToOne(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties("user")
+//    @JsonIgnoreProperties("user")
     private WishList wishlist;
 
 //    public List<Transaction> getTransactions() {

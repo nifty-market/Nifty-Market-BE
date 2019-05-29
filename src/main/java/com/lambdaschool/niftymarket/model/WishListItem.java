@@ -1,15 +1,22 @@
 package com.lambdaschool.niftymarket.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
+@Table(name = "wishlistitem")
 public class WishListItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long wishitemid;
 
     @ManyToOne
+    @JsonIgnore//this seems to be the root of your JSON recursion issue
     private Product product;
 
     public WishListItem() {
@@ -41,5 +48,18 @@ public class WishListItem {
                 "wishitemid=" + wishitemid +
                 ", product=" + product +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WishListItem)) return false;
+        WishListItem that = (WishListItem) o;
+        return Objects.equals(getProduct(), that.getProduct());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getProduct());
     }
 }

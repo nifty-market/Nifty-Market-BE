@@ -1,10 +1,12 @@
 package com.lambdaschool.niftymarket.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,11 +23,11 @@ public class WishList extends Auditable {
 //    private User user;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties({"wishlist","hibernateLazyInitializer"})
+    @JsonIgnoreProperties({"wishlist","hibernateLazyInitializer"})
     private Set<WishListItem> wishListItems;
 
     @OneToOne
-    @JsonIgnoreProperties("wishlist")
+    @JsonIgnore
     private User user;
 
     public WishList() {
@@ -58,6 +60,20 @@ public class WishList extends Auditable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WishList)) return false;
+        WishList wishList = (WishList) o;
+        return Objects.equals(getWishListItems(), wishList.getWishListItems()) &&
+                Objects.equals(getUser(), wishList.getUser());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getWishListItems(), getUser());
     }
 }
 

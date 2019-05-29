@@ -68,29 +68,33 @@ public class WishListController {
         User currentUser = userRepository.findByUsername(username);
 
         //Instantiate new wish-list-item based on desired product
-        WishListItem wishItem = new WishListItem(productService.findProductById(itemid));
-        System.out.println(wishItem);
+//        WishListItem wishItem = new WishListItem(productService.findProductById(itemid));
+//        System.out.println(wishItem);
 
         //OR Get current wishlist from user
-        WishList currentWishlist = currentUser.getWishlist();
-        if (currentWishlist == null){
+        WishList currentWishList = currentUser.getWishlist();
+        WishListItem wishItem = new WishListItem(productService.findProductById(itemid));
+        if (currentWishList == null){
+
+
             Set<WishListItem> a = new HashSet<>();
             a.add(wishItem);
             WishList emptyWishlist = new WishList(a,currentUser);
             wishListRepository.save(emptyWishlist);
-
         }
         else{
-            WishList userlist = currentUser.getWishlist();
-            userlist.getWishListItems().add(wishItem);
-            wishListRepository.save(userlist);
+            WishList currentUserWishlist = currentUser.getWishlist();
+            currentUserWishlist.getWishListItems().add(wishItem);
+            wishListRepository.save(currentUserWishlist);
+
+
         }
-
-
 
         //Instantiate new wish list object add product, add user identity, save
 
 
+//        emptyWishlist.getWishListItems().add(wishItem);
+//        emptyWishlist.setUser(currentUser);
 
 
 
